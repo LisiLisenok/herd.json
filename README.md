@@ -5,7 +5,7 @@ This project is based and in general is similar to SDK module `ceylon.json`.
 In contrast with SDK it contains mutable and immutable JSON object and array.
 
 ####JSON value
-value JSON operates with, one of:
+Value JSON operates with.
 `String | Boolean | Integer | Float | JsonObject | JsonArray | Null`
 
 ####JSON Object
