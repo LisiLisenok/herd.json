@@ -51,4 +51,66 @@ shared class JsonMap({<String->JsonValue>*} values = {})
 		}
 	}
 	
+	
+	"Returns an [[JsonMap]] value."
+	throws(`class InvalidTypeException`,
+		"If the key dot not exist or points to a type that 
+		 is not [[JsonMap]].")
+	shared actual JsonMap getJsonObject(String key){
+		value val = get(key);
+		if(is JsonMap val){
+			return val;
+		}
+		throw InvalidTypeException(
+			"Expecting an JsonMap but got: `` 
+			val else "null" ``");
+	}
+	
+	"Returns an [[JsonList]] value."
+	throws(`class InvalidTypeException`,
+		"If the key dot not exist or points to a type that 
+		 is not [[JsonList]].")
+	shared actual JsonList getJsonArray(String key){
+		value val = get(key);
+		if(is JsonList val){
+			return val;
+		}
+		throw InvalidTypeException(
+			"Expecting an JsonList but got: `` 
+			val else "null" ``");
+	}
+	
+	
+	"Returns an [[JsonMap]] value, unless the key does not 
+	 exist, or the value is null."
+	throws(`class InvalidTypeException`,
+		"If the key points to a type that is neither 
+		 [[JsonMap]] nor [[Null]].")
+	shared actual JsonMap? getJsonObjectOrNull(String key){
+		value val = get(key);
+		if(is JsonMap? val){
+			return val;
+		}
+		else {
+			throw InvalidTypeException(
+				"Expecting an JsonMap but got: ``val``");
+		}
+	}
+	
+	"Returns an [[JsonList]] value, unless the key does not 
+	 exist, or the value is null."
+	throws(`class InvalidTypeException`,
+		"If the key points to a type that is neither 
+		 [[JsonList]] nor [[Null]].")
+	shared actual JsonList? getJsonArrayOrNull(String key){
+		value val = get(key);
+		if(is JsonList? val){
+			return val;
+		}
+		else {
+			throw InvalidTypeException(
+				"Expecting an JsonList but got: ``val``");
+		}
+	}
+		
 }

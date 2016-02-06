@@ -38,10 +38,9 @@ shared interface JsonArray
 			"Expecting Object but got `` val else "null" ``");
 	}
 	
-	"Returns this array as a sequence of [[Object]] elements."
-	throws(`class InvalidTypeException`,
-		"If one element in this array is not an [[Object]].")
-	shared Iterable<JsonObject> objects 
+	"Returns this array as a sequence of [[JsonObject]] elements."
+	throws( `class InvalidTypeException`, "If one element in this array is not an [[JsonObject]]." )
+	shared default Iterable<JsonObject> objects 
 			=> { for (elem in this) checkObject(elem) };
 	
 	throws(`class InvalidTypeException`)
@@ -56,7 +55,7 @@ shared interface JsonArray
 	"Returns this array as a sequence of [[String]] elements."
 	throws(`class InvalidTypeException`,
 		"If one element in this array is not a [[String]].")
-	shared Iterable<String> strings 
+	shared default Iterable<String> strings 
 			=> { for (elem in this) checkString(elem) };
 	
 	throws(`class InvalidTypeException`)
@@ -71,7 +70,7 @@ shared interface JsonArray
 	"Returns this array as a sequence of [[Integer]] elements."
 	throws(`class InvalidTypeException`,
 		"If one element in this array is not a [[Integer]].")
-	shared Iterable<Integer> integers 
+	shared default Iterable<Integer> integers 
 			=> { for (elem in this) checkInteger(elem) };
 	
 	throws(`class InvalidTypeException`)
@@ -86,7 +85,7 @@ shared interface JsonArray
 	"Returns this array as a sequence of [[Float]] elements."
 	throws(`class InvalidTypeException`,
 		"If one element in this array is not a [[Float]].")
-	shared Iterable<Float> floats 
+	shared default Iterable<Float> floats 
 			=> { for (elem in this) checkFloat(elem) };
 	
 	throws(`class InvalidTypeException`)
@@ -101,7 +100,7 @@ shared interface JsonArray
 	"Returns this array as a sequence of [[Boolean]] elements."
 	throws(`class InvalidTypeException`,
 		"If one element in this array is not a [[Boolean]].")
-	shared Iterable<Boolean> booleans 
+	shared default Iterable<Boolean> booleans 
 			=> { for (elem in this) checkBoolean(elem) };
 	
 	throws(`class InvalidTypeException`)
@@ -113,10 +112,9 @@ shared interface JsonArray
 			"Expecting Array but got `` val else "null" ``");
 	}
 	
-	"Returns this array as a sequence of [[Array]] elements."
-	throws(`class InvalidTypeException`,
-		"If one element in this array is not an [[Array]].")
-	shared Iterable<JsonArray> arrays 
+	"Returns this array as a sequence of [[JsonArray]] elements."
+	throws( `class InvalidTypeException`, "If one element in this array is not an [[JsonArray]]." )
+	shared default Iterable<JsonArray> arrays 
 			=> { for (elem in this) checkArray(elem) };
 	
 }

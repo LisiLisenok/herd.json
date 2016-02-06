@@ -26,6 +26,14 @@ shared class JsonList
 	}
 	
 	
+	"Returns this array as a sequence of [[JsonMap]] elements."
+	throws( `class InvalidTypeException`, "If one element in this array is not an [[JsonObject]]." )
+	shared actual Iterable<JsonMap> objects => super.objects.narrow<JsonMap>();
+	
+	"Returns this array as a sequence of [[JsonList]] elements."
+	throws( `class InvalidTypeException`, "If one element in this array is not an [[JsonArray]]." )
+	shared actual Iterable<JsonList> arrays => super.arrays.narrow<JsonList>(); 
+	
 	
 	shared actual JsonArray immutable() => if ( empty ) then emptyJsonList else this;
 	

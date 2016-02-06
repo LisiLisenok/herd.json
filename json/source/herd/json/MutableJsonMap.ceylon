@@ -26,6 +26,8 @@ shared class MutableJsonMap({<String->JsonValue>*} values = {})
     
     shared actual Boolean empty => content.empty;
     
+    shared actual Integer size => content.size;
+    
     "returns immutable array with items currently stored in this"
     shared actual JsonObject immutable()
             =>	if ( empty ) then emptyJsonMap
@@ -72,8 +74,6 @@ shared class MutableJsonMap({<String->JsonValue>*} values = {})
     
     remove(String key) => content.remove(key);
     
-    size => content.size;
-    
     hash => content.hash;
     
     shared actual Boolean equals(Object that) {
@@ -82,6 +82,68 @@ shared class MutableJsonMap({<String->JsonValue>*} values = {})
         }
         else {
             return false;
+        }
+    }
+    
+    
+    "Returns an [[MutableJsonMap]] value."
+    throws(`class InvalidTypeException`,
+        "If the key dot not exist or points to a type that 
+         is not [[MutableJsonMap]].")
+    shared actual MutableJsonMap getJsonObject(String key){
+        value val = get(key);
+        if(is MutableJsonMap val){
+            return val;
+        }
+        throw InvalidTypeException(
+            "Expecting an MutableJsonMap but got: `` 
+            val else "null" ``");
+    }
+    
+    "Returns an [[MutableJsonList]] value."
+    throws(`class InvalidTypeException`,
+        "If the key dot not exist or points to a type that 
+         is not [[MutableJsonList]].")
+    shared actual MutableJsonList getJsonArray(String key){
+        value val = get(key);
+        if(is MutableJsonList val){
+            return val;
+        }
+        throw InvalidTypeException(
+            "Expecting an MutableJsonList but got: `` 
+            val else "null" ``");
+    }
+    
+    
+    "Returns an [[MutableJsonMap]] value, unless the key does not 
+     exist, or the value is null."
+    throws(`class InvalidTypeException`,
+        "If the key points to a type that is neither 
+         [[MutableJsonMap]] nor [[Null]].")
+    shared actual MutableJsonMap? getJsonObjectOrNull(String key){
+        value val = get(key);
+        if(is MutableJsonMap? val){
+            return val;
+        }
+        else {
+            throw InvalidTypeException(
+                "Expecting an MutableJsonMap but got: ``val``");
+        }
+    }
+    
+    "Returns an [[MutableJsonList]] value, unless the key does not 
+     exist, or the value is null."
+    throws(`class InvalidTypeException`,
+        "If the key points to a type that is neither 
+         [[MutableJsonList]] nor [[Null]].")
+    shared actual MutableJsonList? getJsonArrayOrNull(String key){
+        value val = get(key);
+        if(is MutableJsonList? val){
+            return val;
+        }
+        else {
+            throw InvalidTypeException(
+                "Expecting an MutableJsonList but got: ``val``");
         }
     }
     

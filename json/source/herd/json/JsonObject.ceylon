@@ -32,7 +32,7 @@ shared interface JsonObject
 	throws(`class InvalidTypeException`,
 		"If the key dot not exist or points to a type that 
 		 is not [[Integer]].")
-	shared Integer getInteger(String key){
+	shared default Integer getInteger(String key){
 		value val = get(key);
 		if(is Integer val){
 			return val;
@@ -46,7 +46,7 @@ shared interface JsonObject
 	throws(`class InvalidTypeException`,
 		"If the key dot not exist or points to a type that 
 		 is not [[Float]].")
-	shared Float getFloat(String key){
+	shared default Float getFloat(String key){
 		value val = get(key);
 		if(is Float val){
 			return val;
@@ -60,7 +60,7 @@ shared interface JsonObject
 	throws(`class InvalidTypeException`,
 		"If the key dot not exist or points to a type that 
 		 is not [[Boolean]].")
-	shared Boolean getBoolean(String key){
+	shared default Boolean getBoolean(String key){
 		value val = get(key);
 		if(is Boolean val){
 			return val;
@@ -74,7 +74,7 @@ shared interface JsonObject
 	throws(`class InvalidTypeException`,
 		"If the key dot not exist or points to a type that 
 		 is not [[String]].")
-	shared String getString(String key){
+	shared default String getString(String key){
 		value val = get(key);
 		if(is String val){
 			return val;
@@ -84,31 +84,31 @@ shared interface JsonObject
 			val else "null" ``");
 	}
 	
-	"Returns an [[Object]] value."
+	"Returns an [[JsonObject]] value."
 	throws(`class InvalidTypeException`,
 		"If the key dot not exist or points to a type that 
-		 is not [[Object]].")
-	shared JsonObject getObject(String key){
+		 is not [[JsonObject]].")
+	shared default JsonObject getJsonObject(String key){
 		value val = get(key);
 		if(is JsonObject val){
 			return val;
 		}
 		throw InvalidTypeException(
-			"Expecting an Object but got: `` 
+			"Expecting an JsonObject but got: `` 
 			val else "null" ``");
 	}
 	
-	"Returns an [[Array]] value."
+	"Returns an [[JsonArray]] value."
 	throws(`class InvalidTypeException`,
 		"If the key dot not exist or points to a type that 
-		 is not [[Array]].")
-	shared JsonArray getArray(String key){
+		 is not [[JsonArray]].")
+	shared default JsonArray getJsonArray(String key){
 		value val = get(key);
 		if(is JsonArray val){
 			return val;
 		}
 		throw InvalidTypeException(
-			"Expecting an Array but got: `` 
+			"Expecting an JsonArray but got: `` 
 			val else "null" ``");
 	}
 	
@@ -119,7 +119,7 @@ shared interface JsonObject
 	throws(`class InvalidTypeException`,
 		"If the key points to a type that is neither 
 		 [[Integer]] nor [[Null]].")
-	shared Integer? getIntegerOrNull(String key){
+	shared default Integer? getIntegerOrNull(String key){
 		value val = get(key);
 		if(is Integer? val){
 			return val;
@@ -135,7 +135,7 @@ shared interface JsonObject
 	throws(`class InvalidTypeException`,
 		"If the key points to a type that is neither 
 		 [[Float]] nor [[Null]].")
-	shared Float? getFloatOrNull(String key){
+	shared default Float? getFloatOrNull(String key){
 		value val = get(key);
 		if(is Float? val){
 			return val;
@@ -151,7 +151,7 @@ shared interface JsonObject
 	throws(`class InvalidTypeException`,
 		"If the key points to a type that is neither 
 		 [[Boolean]] nor [[Null]].")
-	shared Boolean? getBooleanOrNull(String key){
+	shared default Boolean? getBooleanOrNull(String key){
 		value val = get(key);
 		if(is Boolean? val){
 			return val;
@@ -167,7 +167,7 @@ shared interface JsonObject
 	throws(`class InvalidTypeException`,
 		"If the key points to a type that is neither 
 		 [[String]] nor [[Null]].")
-	shared String? getStringOrNull(String key){
+	shared default String? getStringOrNull(String key){
 		value val = get(key);
 		if(is String|Null val){
 			return val;
@@ -178,35 +178,35 @@ shared interface JsonObject
 		}
 	}
 	
-	"Returns an [[Object]] value, unless the key does not 
+	"Returns an [[JsonObject]] value, unless the key does not 
 	 exist, or the value is null."
 	throws(`class InvalidTypeException`,
 		"If the key points to a type that is neither 
-		 [[Object]] nor [[Null]].")
-	shared JsonObject? getObjectOrNull(String key){
+		 [[JsonObject]] nor [[Null]].")
+	shared default JsonObject? getJsonObjectOrNull(String key){
 		value val = get(key);
 		if(is JsonObject? val){
 			return val;
 		}
 		else {
 			throw InvalidTypeException(
-				"Expecting an Object but got: ``val``");
+				"Expecting an JsonObject but got: ``val``");
 		}
 	}
 	
-	"Returns an [[Array]] value, unless the key does not 
+	"Returns an [[JsonArray]] value, unless the key does not 
 	 exist, or the value is null."
 	throws(`class InvalidTypeException`,
 		"If the key points to a type that is neither 
-		 [[Array]] nor [[Null]].")
-	shared JsonArray? getArrayOrNull(String key){
+		 [[JsonArray]] nor [[Null]].")
+	shared default JsonArray? getJsonArrayOrNull(String key){
 		value val = get(key);
 		if(is JsonArray? val){
 			return val;
 		}
 		else {
 			throw InvalidTypeException(
-				"Expecting an Array but got: ``val``");
+				"Expecting an JsonArray but got: ``val``");
 		}
 	}
 	

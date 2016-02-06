@@ -23,6 +23,16 @@ shared class MutableJsonList({JsonValue*} values = {})
     };
     
     
+    
+    "Returns this array as a sequence of [[MutableJsonMap]] elements."
+    throws( `class InvalidTypeException`, "If one element in this array is not an [[JsonObject]]." )
+    shared actual Iterable<MutableJsonMap> objects => super.objects.narrow<MutableJsonMap>();
+    
+    "Returns this array as a sequence of [[MutableJsonList]] elements."
+    throws( `class InvalidTypeException`, "If one element in this array is not an [[JsonArray]]." )
+    shared actual Iterable<MutableJsonList> arrays => super.arrays.narrow<MutableJsonList>(); 
+
+    
     iterator() => list.iterator();
     
     getFromFirst(Integer index) => list.getFromFirst(index);
