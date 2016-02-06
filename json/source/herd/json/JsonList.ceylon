@@ -2,20 +2,29 @@
 "
  Represents an immutable JSON Array.  
  All items of JsonArray or JsonObject types are immutable.
- If mutable item is specified in the [[values]] new immutable item contains the same elements as original
+ If mutable item is specified in the default constructor new immutable item contains the same elements as original
  is created and stored in the map
  "
-shared class JsonList({JsonValue*} values = {}) 
+shared class JsonList 
     satisfies JsonArray
 {
-	Array<JsonValue> content = Array<JsonValue> {
-		for ( val in values )
-		if ( is MutableJsonList val )
-		then val.immutable()
-		else if ( is MutableJsonMap val )
-		then val.immutable()
-		else val
-	};
+	List<JsonValue> content;
+	
+	shared new ({JsonValue*} values = {}) {
+		content = Array<JsonValue> {
+			for ( val in values )
+			if ( is MutableJsonList val )
+			then val.immutable()
+			else if ( is MutableJsonMap val )
+			then val.immutable()
+			else val
+		};
+	}
+	
+	new fromImmutable( List<JsonValue> values ) {
+		content = values;
+	}
+	
 	
 	
 	shared actual JsonArray immutable() => if ( empty ) then emptyJsonList else this;
@@ -29,21 +38,21 @@ shared class JsonList({JsonValue*} values = {})
 	
 	shared actual Integer? lastIndex => content.lastIndex;
 	
-	shared actual JsonArray reversed => if ( empty ) then emptyJsonList else JsonList(content.reversed);
+	shared actual JsonArray reversed => if ( empty ) then emptyJsonList else JsonList.fromImmutable(content.reversed);
 	
-	shared actual JsonArray rest => if ( empty ) then emptyJsonList else JsonList(content.rest);
+	shared actual JsonArray rest => if ( empty ) then emptyJsonList else JsonList.fromImmutable(content.rest);
 	
 	shared actual JsonArray measure(Integer from, Integer length) 
-			=> if ( empty ) then emptyJsonList else JsonList(content.measure(from, length));
+			=> if ( empty ) then emptyJsonList else JsonList.fromImmutable(content.measure(from, length));
 	
 	shared actual JsonArray span(Integer from, Integer to) 
-			=> if ( empty ) then emptyJsonList else JsonList(content.span(from, to));
+			=> if ( empty ) then emptyJsonList else JsonList.fromImmutable(content.span(from, to));
 	
 	shared actual JsonArray spanFrom(Integer from) 
-			=> if ( empty ) then emptyJsonList else JsonList(content.spanFrom(from));
+			=> if ( empty ) then emptyJsonList else JsonList.fromImmutable(content.spanFrom(from));
 	
 	shared actual JsonArray spanTo(Integer to) 
-			=> if ( empty ) then emptyJsonList else JsonList(content.spanTo(to));
+			=> if ( empty ) then emptyJsonList else JsonList.fromImmutable(content.spanTo(to));
 	
 	
 	shared actual Integer hash => content.hash;
